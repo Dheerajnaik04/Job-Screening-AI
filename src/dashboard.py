@@ -3,6 +3,7 @@ import requests
 import pandas as pd
 import json
 from datetime import datetime
+import os
 
 # Configure the page
 st.set_page_config(
@@ -12,7 +13,7 @@ st.set_page_config(
 )
 
 # Constants
-API_URL = "http://localhost:8000"
+API_URL = os.getenv("API_URL", "http://localhost:8000")  # Default to localhost if not set
 
 def main():
     st.title("Job Screening AI Dashboard")

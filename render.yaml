@@ -1,0 +1,26 @@
+services:
+  # FastAPI Backend Service
+  - type: web
+    name: job-screening-api
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn src.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9.0
+      - key: DATABASE_URL
+        value: sqlite:///job_screening.db
+
+  # Streamlit Frontend Service
+  - type: web
+    name: job-screening-dashboard
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run src/dashboard.py --server.port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9.0
+      - key: API_URL
+        value: https://job-screening-api.onrender.com 
