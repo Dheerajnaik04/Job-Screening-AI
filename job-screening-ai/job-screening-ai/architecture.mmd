@@ -1,0 +1,29 @@
+graph TD
+    UI[Streamlit UI] <--> API[FastAPI Backend]
+    API <--> DB[(SQLite DB)]
+    
+    API <--> JD[JD Analyzer Agent]
+    API <--> CV[CV Analyzer Agent]
+    
+    JD <--> MA[Matcher Agent]
+    CV <--> MA
+    
+    MA <--> SA[Scheduler Agent]
+    
+    JD --> ST[Sentence Transformers]
+    CV --> ST
+    MA --> ST
+    
+    JD --> OL[Ollama]
+    CV --> OL
+    SA --> OL
+
+    classDef primary fill:#2496ed,stroke:#fff,stroke-width:2px,color:#fff
+    classDef secondary fill:#87ceeb,stroke:#fff,stroke-width:2px,color:#fff
+    classDef database fill:#f96,stroke:#fff,stroke-width:2px,color:#fff
+    classDef ai fill:#9f9,stroke:#fff,stroke-width:2px,color:#fff
+    
+    class UI,API primary
+    class JD,CV,MA,SA secondary
+    class DB database
+    class ST,OL ai 
